@@ -1,45 +1,47 @@
-import React from 'react';
-import { push } from 'react-router-redux';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import GitHubLogin from 'react-github-login';
 
+import { login } from '../../modules/login'
 import loginConstants from '../../constants/login.constants'
 
-const onLoginSuccess = response => {
-  let data = new FormData()
-  data.append('code', response.code)
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.onLoginSuccess = this.onLoginSuccess.bind(this);
+  }
 
-  fetch(`${loginConstants.GITHUB_MYGATEKEEPER}/authenticate/${response.code}`)
-    .then(res => {
-        res.json().then(res => {
-          console.log(res.token);
-          fetch(`https://api.github.com/user/repos?access_token=${res.token}`)
-            .then(repos => {
-                repos.json().then(repos => {
-                  console.log(repos);
-                })
-            })
-      });
-    });
+  onLoginSuccess(res) {
+    this.props.login(res.code);
+  }
+
+  onLoginFaiture(res) {
+    console.log(res);
+  }
+
+  render() {
+    return (
+      <div>
+        <GitHubLogin clientId={loginConstants.GITHUB_CLIENTID}
+          redirectUri={window.location.origin}
+          scope='user,repo'
+          onSuccess={this.onLoginSuccess}
+          onFailure={this.onLoginFailure}/>
+      </div>
+    )
+  }
 };
-const onLoginFailure = response => console.error(response.token);
 
-const Login = props => (
-  <div>
-    <GitHubLogin clientId={loginConstants.GITHUB_CLIENTID}
-      redirectUri={window.location.origin}
-      scope='user,repo'
-      onSuccess={onLoginSuccess}
-      onFailure={onLoginFailure}/>
-  </div>
-);
+const mapStateToProps = state => ({
+  access_token: state.auth.access_token
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  viewList: () => push('/list')
+  login
 }, dispatch);
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Login);
