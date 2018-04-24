@@ -1,4 +1,5 @@
 import loginConstants from '../constants/login.constants';
+import { history } from '../store'
 
 const initialState = { access_token: '' };
 
@@ -31,17 +32,18 @@ export const login = code => {
     fetch(`${loginConstants.GITHUB_MYGATEKEEPER}/authenticate/${code}`)
       .then(res => {
           res.json().then(res => {
-            console.log(res.token);
             dispatch(success(res.token));
+            sessionStorage.setItem('access_token', res.token);
+            history.push('/list');
         });
       })
       .catch(function(error) {
-        console.log(error)
+        console.error(error)
         dispatch(failure(error));
       });
 
-    function request(code) { return { type: loginConstants.LOGIN_REQUEST, code } }
-    function success(token) { return { type: loginConstants.LOGIN_SUCCESS, token } }
-    function failure(error) { return { type: loginConstants.LOGIN_FAILURE, error } }
+    function request(code) { return { type: loginConstants.LOGIN_REQUEST, code } };
+    function success(token) { return { type: loginConstants.LOGIN_SUCCESS, token } };
+    function failure(error) { return { type: loginConstants.LOGIN_FAILURE, error } };
   }
 };
