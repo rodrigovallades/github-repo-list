@@ -12,8 +12,14 @@ const onLoginSuccess = response => {
 
   fetch(`${loginConstants.GITHUB_MYGATEKEEPER}/authenticate/${response.code}`)
     .then(res => {
-      res.json().then(res => {
-        console.log(`github oauth_token: ${res.token}`);
+        res.json().then(res => {
+          console.log(res.token);
+          fetch(`https://api.github.com/user/repos?access_token=${res.token}`)
+            .then(repos => {
+                repos.json().then(repos => {
+                  console.log(repos);
+                })
+            })
       });
     });
 };
