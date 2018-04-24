@@ -2,11 +2,30 @@ import React from 'react';
 import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import GitHubLogin from 'react-github-login';
+
+import loginConstants from '../../constants/login.constants'
+
+const onLoginSuccess = response => {
+  let data = new FormData()
+  data.append('code', response.code)
+
+  fetch(`${loginConstants.GITHUB_MYGATEKEEPER}/authenticate/${response.code}`)
+    .then(res => {
+      res.json().then(res => {
+        console.log(`github oauth_token: ${res.token}`);
+      });
+    });
+};
+const onLoginFailure = response => console.error(response.token);
 
 const Login = props => (
   <div>
-    <h1>Login</h1>
-    <button onClick={() => props.viewList()}>Go to repo list page via redux</button>
+    <GitHubLogin clientId={loginConstants.GITHUB_CLIENTID}
+      redirectUri={window.location.origin}
+      scope='user,repo'
+      onSuccess={onLoginSuccess}
+      onFailure={onLoginFailure}/>
   </div>
 );
 
