@@ -38,12 +38,12 @@ List page
 npm install
 ```
 
-### Deveopment (run locally)
+### Development (run locally)
 ```
 npm start
 ```
 
-### How to build for production
+### How to build for production (minify, etc)
 ```
 npm run build
 ```
