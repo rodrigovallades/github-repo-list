@@ -25,7 +25,7 @@ export const getRepos = access_token => {
   return dispatch => {
     dispatch(request({ access_token }));
 
-    fetch(`${reposConstants.GITHUB_REPOS_API}?access_token=${access_token}`)
+    fetch(`${reposConstants.GITHUB_REPOS_API}?access_token=${access_token}&sort=updated&type=owner`)
       .then(repos => {
         repos.json().then(repos => {
           console.log(repos);

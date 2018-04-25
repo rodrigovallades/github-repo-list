@@ -43,7 +43,7 @@ class Repos extends Component {
     return (
       <div>
         <Grid>
-          <h1 className="display-4">Repos</h1>
+          <h1 className="display-4">Repos <span className="badge badge-light">{this.props.repos.length}</span></h1>
           <div className='repos'>
             {this.renderRepos()}
           </div>
