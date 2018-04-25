@@ -34,7 +34,7 @@ export const login = code => {
           res.json().then(res => {
             dispatch(success(res.token));
             sessionStorage.setItem('access_token', res.token);
-            history.push('/list');
+            history.push('/repos');
         });
       })
       .catch(function(error) {

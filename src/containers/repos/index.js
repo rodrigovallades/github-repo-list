@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { Grid } from 'react-bootstrap';
 import Octicon from 'react-octicon'
 
-import { getRepos } from '../../modules/list';
+import { getRepos } from '../../modules/repos';
 import { history } from '../../store';
 
-import './list.css'
+import './repos.css'
 
-class List extends Component {
+class Repos extends Component {
   componentWillMount() {
     const access_token = sessionStorage.getItem('access_token')
 
@@ -74,4 +74,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(List);
+)(Repos);

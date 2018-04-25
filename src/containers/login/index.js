@@ -20,7 +20,7 @@ class Login extends Component {
 
   componentWillMount() {
     const access_token = sessionStorage.getItem('access_token')
-    if (access_token) history.push('/list');
+    if (access_token) history.push('/repos');
   }
 
   onLoginSuccess(res) {

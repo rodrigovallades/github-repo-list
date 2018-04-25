@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import Login from '../login';
-import List from '../list';
+import Repos from '../repos';
 
 const App = () => (
   <div>
     <main>
       <Route exact path="/" component={Login} />
-      <Route exact path="/list" component={List} />
+      <Route exact path="/repos" component={Repos} />
     </main>
   </div>
 );
