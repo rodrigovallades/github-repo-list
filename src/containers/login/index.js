@@ -12,7 +12,7 @@ import Loader from '../../components/Loader'
 
 import './login.css'
 
-class Login extends Component {
+export class Login extends Component {
   constructor(props) {
     super(props);
     this.onLoginSuccess = this.onLoginSuccess.bind(this);

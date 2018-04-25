@@ -10,7 +10,14 @@ import Loader from '../../components/Loader'
 
 import './repos.css'
 
-class Repos extends Component {
+export class Repos extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      repos: []
+    };
+  }
+
   componentWillMount() {
     const access_token = sessionStorage.getItem('access_token')
 
@@ -21,8 +28,12 @@ class Repos extends Component {
     }
   }
 
+  componentWillReceiveProps(props){
+    this.setState({ repos: props.repos })
+  }
+
   renderRepos() {
-    const repos = this.props.repos ?  this.props.repos : [];
+    const repos = this.props.repos ? this.props.repos : [];
 
     return repos.map((repo, index) => {
       return (
@@ -54,7 +65,7 @@ class Repos extends Component {
       <div>
         {this.renderLoader()}
         <Grid>
-          <h1 className="display-4">Repos <span className="badge badge-light">{this.props.repos.length}</span></h1>
+          <h1 className="display-4">Repos <span className="badge badge-light">{this.state.repos.length}</span></h1>
           <div className='repos'>
             {this.renderRepos()}
           </div>
