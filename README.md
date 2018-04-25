@@ -56,9 +56,14 @@ npm install
 npm start
 ```
 
-### How to build for production (minify, etc)
+### Build for production (minify, etc)
 ```
 npm run build
+```
+
+### Run tests
+```
+npm test
 ```
 
 
