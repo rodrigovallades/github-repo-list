@@ -18,7 +18,7 @@
 - Only authenticated users have access to this page
 - The authenticated session must persist even if the user reloads the page
 - When exiting the page, the login expires
-- Each repo must have at show at least this info: name, stars and forks
+- Each repo must show at least this info: name, stars and forks
 - The list page should have a specific route
 
 ### API
