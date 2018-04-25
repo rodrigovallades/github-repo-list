@@ -36,7 +36,7 @@ class Login extends Component {
       <div>
         <Grid>
           <Jumbotron className='text-center github-login'>
-            <h1 className="display-4">GitHub's repo list</h1>
+            <h1 className="app-title display-4">GitHub's repo list</h1>
             <h4>Tech stack</h4>
             <ul className="list-inline">
               <li className="list-inline-item"><Octicon name="heart"/> React 16</li>
@@ -53,7 +53,7 @@ class Login extends Component {
               <li className="list-inline-item"><Octicon name="heart"/> Mobile-first approach</li>
             </ul>
             <hr className="my-4" />
-            <p>This application requires OAuth style authentication with GitHub to display the authorized users' repos.</p>
+            <p className="lead">This application requires OAuth style authentication with GitHub to display the authorized users' repos.</p>
             <GitHubLogin
               className='login-button btn btn-primary btn-lg'
               clientId={loginConstants.GITHUB_CLIENTID}

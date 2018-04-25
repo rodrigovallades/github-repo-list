@@ -1,0 +1,61 @@
+.repos__repo .card-avatar {
+  display: none;
+}
+.repos__repo {
+  margin-bottom: 10px;
+}
+.card-github-icons {
+  float: right;
+}
+.card-github-icon {
+  display: inline-block;
+  margin-left: 10px;
+}
+  .card-github-icon:first-child {
+    margin-left: 0;
+  }
+
+@media (min-width: 500px) {
+  .repos__repo {
+    width: 49%;
+    margin: 1%;
+  }
+  .repos__repo .card-avatar {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+  }
+    .repos__repo .card-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  .repos__repo:nth-of-type(2n+1) {
+    margin-left: 0;
+  }
+  .repos__repo:nth-of-type(2n) {
+    margin-right: 0;
+  }
+  .card-github-icon {
+    height: 30px;
+    line-height: 30px;
+  }
+}
+
+@media (min-width: 900px) {
+  .repos__repo {
+    width: 32%;
+  }
+  .repos__repo:nth-of-type(2n+1) {
+    margin-left: auto;
+  }
+  .repos__repo:nth-of-type(2n) {
+    margin-right: auto;
+  }
+  .repos__repo:nth-of-type(3n+1) {
+    margin-left: 0;
+  }
+  .repos__repo:nth-of-type(3n) {
+    margin-right: 0;
+  }
+}

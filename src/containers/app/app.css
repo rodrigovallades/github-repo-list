@@ -6,6 +6,9 @@ h1.display-4 {
 }
 
 @media (min-width: 500px) {
+  .app-title {
+    margin-bottom: 1.5rem;
+  }
   html {
     font-size: 1rem;
   }

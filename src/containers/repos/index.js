@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Grid } from 'react-bootstrap';
-import Octicon from 'react-octicon'
 
 import { getRepos } from '../../modules/repos';
 import { history } from '../../store';
+import RepoCard from '../../components/RepoCard'
 
 import './repos.css'
 
@@ -25,26 +25,16 @@ class Repos extends Component {
 
     return repos.map((repo, index) => {
       return (
-        <div key={index} className="card repos__repo">
-          <div className="card-body">
-            <h5 className="card-title"><a href={repo.html_url} target="_blank">{repo.name}</a></h5>
-            <p className="card-text">{repo.description}</p>
-          </div>
-          <div className="card-footer">
-            <div className="card-avatar"><img src={repo.owner.avatar_url} alt="Owner avatar" title={repo.owner.login} /></div>
-            <div className="card-github-icons">
-              <div className="card-github-icon" title="Stars">
-                {repo.stargazers_count} <Octicon name="star"/>
-              </div>
-              <div className="card-github-icon" title="Forks">
-                {repo.forks_count} <Octicon name="repo-forked"/>
-              </div>
-              <div className="card-github-icon" title="Watchers">
-                {repo.watchers_count} <Octicon name="eye"/>
-              </div>
-            </div>
-          </div>
-        </div>
+        <RepoCard
+          key={index}
+          html_url={repo.html_url}
+          name={repo.name}
+          description={repo.description}
+          avatar_url={repo.owner.avatar_url}
+          login={repo.owner.login}
+          stargazers_count={repo.stargazers_count}
+          forks_count={repo.forks_count}
+          watchers_count={repo.watchers_count} />
       )
     })
   }
