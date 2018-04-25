@@ -6,6 +6,16 @@
   - GitHub: https://github.com/rodrigovallades
   - Linkedin: http://lnkd.in/p9wz2A
 
+## Technologies, techniques and best practices used
+
+- [x] React 16 + Redux 5 + React-Router 4
+- [x] ES6
+- [x] Persisting OAuth token with sessionStorage
+- [x] Flexbox
+- [x] Bootstrap 4
+- [x] BEM CSS naming
+- [x] Mobile-first approach
+
 ## Challenge requirements
 
 ### Login page
@@ -33,16 +43,6 @@ https://developer.github.com/v3/guides/basics-of-authentication/#accepting-user-
 
 https://developer.github.com/v3/repos/#list-your-repositories
 
-
-## Technologies, techniques and best practices used
-
-- [x] React 16 + Redux 5 + React-Router 4
-- [x] ES6
-- [x] Persisting OAuth token with sessionStorage
-- [x] Flexbox
-- [x] Bootstrap 4
-- [x] BEM: CSS naming is following (block__element--modifier) pattern
-- [x] Mobile first approach: the layout, the dimensions and the font sizes are primarily set for mobile screens and then inscreased as needed for bigger screens
 
 ## Getting started
 
