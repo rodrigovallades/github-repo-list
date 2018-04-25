@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import GitHubLogin from 'react-github-login';
-import { Grid, Jumbotron } from 'react-bootstrap';
+import { Grid, Jumbotron, Alert } from 'react-bootstrap';
 import Octicon from 'react-octicon'
 
 import { login } from '../../modules/login'
@@ -37,6 +37,7 @@ class Login extends Component {
         <Grid>
           <Jumbotron className='text-center github-login'>
             <h1 className="display-4">GitHub's repo list</h1>
+            <h4>Tech stack</h4>
             <ul className="list-inline">
               <li className="list-inline-item"><Octicon name="heart"/> React 16</li>
               <li className="list-inline-item"><Octicon name="heart"/> React-Router 4</li>
@@ -45,17 +46,25 @@ class Login extends Component {
               <li className="list-inline-item"><Octicon name="heart"/> Webpack 4</li>
               <li className="list-inline-item"><Octicon name="heart"/> JavaScript ES6</li>
             </ul>
-            <p className="lead">Only modern stuff.<br />:)</p>
+            <h4>Techniques and good practices</h4>
+            <ul className="list-inline">
+              <li className="list-inline-item"><Octicon name="heart"/> BEM CSS naming</li>
+              <li className="list-inline-item"><Octicon name="heart"/> Custom responsive CSS with Flexbox</li>
+              <li className="list-inline-item"><Octicon name="heart"/> Mobile-first approach</li>
+            </ul>
             <hr className="my-4" />
             <p>This application requires OAuth style authentication with GitHub to display the authorized users' repos.</p>
             <GitHubLogin
-              className='login_button btn btn-primary btn-lg'
+              className='login-button btn btn-primary btn-lg'
               clientId={loginConstants.GITHUB_CLIENTID}
               redirectUri={window.location.origin}
               scope='user,repo'
               onSuccess={this.onLoginSuccess}
               onFailure={this.onLoginFailure}/>
           </Jumbotron>
+          <Alert bsStyle="info">
+            <Octicon name="info"/> Tip: Download the <strong><a href="https://github.com/zalmoxisus/redux-devtools-extension" target="_blnk">Redux DevTools</a></strong> to inspect the Redux store state.
+          </Alert>
         </Grid>
       </div>
     )

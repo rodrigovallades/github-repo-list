@@ -53,6 +53,7 @@ class List extends Component {
     return (
       <div>
         <Grid>
+          <h1 className="display-4">Repos</h1>
           <div className='repos'>
             {this.renderRepos()}
           </div>
