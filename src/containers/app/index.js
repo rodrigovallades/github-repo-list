@@ -3,6 +3,8 @@ import { Route } from 'react-router-dom';
 import Login from '../login';
 import Repos from '../repos';
 
+import './app.css';
+
 const App = () => (
   <div>
     <main>
