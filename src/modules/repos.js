@@ -1,6 +1,6 @@
 import reposConstants from '../constants/repos.constants';
 
-const initialState = { repos: '' };
+const initialState = { repos: '', loading: true };
 
 // action creators
 export default (state = initialState, action) => {
@@ -8,11 +8,13 @@ export default (state = initialState, action) => {
     case reposConstants.REPOS_SUCCESS:
       return {
         ...state,
+        loading: false,
         repos: action.repos
       };
     case reposConstants.REPOS_FAILURE:
       return {
         ...state,
+        loading: false,
         repos: ''
       };
     default:

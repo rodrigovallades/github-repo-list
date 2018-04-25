@@ -6,6 +6,7 @@ import { Grid } from 'react-bootstrap';
 import { getRepos } from '../../modules/repos';
 import { history } from '../../store';
 import RepoCard from '../../components/RepoCard'
+import Loader from '../../components/Loader'
 
 import './repos.css'
 
@@ -39,9 +40,19 @@ class Repos extends Component {
     })
   }
 
+  renderLoader() {
+    const loading = this.props.loading;
+    if (loading) {
+      return (
+        <Loader />
+      )
+    }
+  }
+
   render() {
     return (
       <div>
+        {this.renderLoader()}
         <Grid>
           <h1 className="display-4">Repos <span className="badge badge-light">{this.props.repos.length}</span></h1>
           <div className='repos'>
@@ -54,7 +65,8 @@ class Repos extends Component {
 };
 
 const mapStateToProps = state => ({
-  repos: state.repos.repos
+  repos: state.repos.repos,
+  loading: state.repos.loading
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

@@ -8,6 +8,7 @@ import Octicon from 'react-octicon'
 import { login } from '../../modules/login'
 import { history } from '../../store';
 import loginConstants from '../../constants/login.constants'
+import Loader from '../../components/Loader'
 
 import './login.css'
 
@@ -31,9 +32,19 @@ class Login extends Component {
     console.log(res);
   }
 
+  renderLoader() {
+    const loading = this.props.loading;
+    if (loading) {
+      return (
+        <Loader />
+      )
+    }
+  }
+
   render() {
     return (
       <div>
+        {this.renderLoader()}
         <Grid>
           <Jumbotron className='text-center github-login'>
             <h1 className="app-title display-4">GitHub's repo list</h1>
@@ -72,7 +83,8 @@ class Login extends Component {
 };
 
 const mapStateToProps = state => ({
-  access_token: state.auth.access_token
+  access_token: state.auth.access_token,
+  loading: state.auth.loading
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

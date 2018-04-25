@@ -1,20 +1,27 @@
 import loginConstants from '../constants/login.constants';
 import { history } from '../store'
 
-const initialState = { access_token: '' };
+const initialState = { access_token: '', loading: false };
 
 // action creators
 export default (state = initialState, action) => {
   switch (action.type) {
+    case loginConstants.LOGIN_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
     case loginConstants.LOGIN_SUCCESS:
       return {
         ...state,
-        access_token: action.token
+        access_token: action.token,
+        loading: false
       };
     case loginConstants.LOGIN_FAILURE:
       return {
         ...state,
-        access_token: ''
+        access_token: '',
+        loading: false
       };
     default:
       return state
