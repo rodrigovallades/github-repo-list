@@ -9,6 +9,7 @@
 ## Technologies, techniques and best practices used
 
 - [x] React 16 + Redux 5 + React-Router 4
+- [x] Tests with Jest + Enzyme
 - [x] ES6
 - [x] Persisting OAuth token with sessionStorage
 - [x] Flexbox
