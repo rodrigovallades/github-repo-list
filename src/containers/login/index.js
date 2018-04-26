@@ -51,17 +51,18 @@ export class Login extends Component {
             <h4>Tech stack</h4>
             <ul className="list-inline">
               <li className="list-inline-item"><Octicon name="heart"/> React 16</li>
-              <li className="list-inline-item"><Octicon name="heart"/> React-Router 4</li>
               <li className="list-inline-item"><Octicon name="heart"/> Redux 5</li>
+              <li className="list-inline-item"><Octicon name="heart"/> Router 4</li>
               <li className="list-inline-item"><Octicon name="heart"/> Bootstrap 4</li>
               <li className="list-inline-item"><Octicon name="heart"/> Webpack 4</li>
-              <li className="list-inline-item"><Octicon name="heart"/> JavaScript ES6</li>
+              <li className="list-inline-item"><Octicon name="heart"/> ES6</li>
+              <li className="list-inline-item"><Octicon name="heart"/> SCSS</li>
             </ul>
             <h4>Techniques and good practices</h4>
             <ul className="list-inline">
-              <li className="list-inline-item"><Octicon name="heart"/> BEM CSS naming</li>
-              <li className="list-inline-item"><Octicon name="heart"/> Custom responsive CSS with Flexbox</li>
-              <li className="list-inline-item"><Octicon name="heart"/> Mobile-first approach</li>
+              <li className="list-inline-item"><Octicon name="heart"/> BEM</li>
+              <li className="list-inline-item"><Octicon name="heart"/> Custom responsive CSS (SCSS + Flexbox)</li>
+              <li className="list-inline-item"><Octicon name="heart"/> Mobile-first</li>
             </ul>
             <hr className="my-4" />
             <p className="lead">This application requires OAuth style authentication with GitHub to display the authorized users' repos.</p>

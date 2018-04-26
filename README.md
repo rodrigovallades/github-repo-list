@@ -16,6 +16,7 @@ https://react-github-repo-list.herokuapp.com/
 - [x] Tests with Jest + Enzyme
 - [x] ES6
 - [x] Persisting OAuth token with sessionStorage
+- [x] SCSS
 - [x] Flexbox
 - [x] Bootstrap 4
 - [x] BEM CSS naming
