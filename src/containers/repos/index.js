@@ -34,7 +34,11 @@ export class Repos extends Component {
 
   renderRepos() {
     const repos = this.props.repos ? this.props.repos : [];
-
+    if (!repos.length) {
+      return (
+        <p>No repos found in this account.</p>
+      )
+    }
     return repos.map((repo, index) => {
       return (
         <RepoCard
