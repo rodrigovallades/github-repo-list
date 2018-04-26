@@ -69,7 +69,7 @@ export class Login extends Component {
               className='login-button btn btn-primary btn-lg'
               clientId={loginConstants.GITHUB_CLIENTID}
               redirectUri={window.location.origin}
-              scope='user,repo'
+              scope=''
               onSuccess={this.onLoginSuccess}
               onFailure={this.onLoginFailure}/>
           </Jumbotron>
