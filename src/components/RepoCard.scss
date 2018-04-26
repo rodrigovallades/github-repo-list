@@ -1,0 +1,63 @@
+@import '../styles/_mixins.scss';
+
+.repos__repo {
+  margin-bottom: 10px;
+
+  @include breakpoint(medium) {
+    width: 49%;
+    margin: 1%;
+
+    &:nth-of-type(2n+1) {
+      margin-left: 0;
+    }
+    &:nth-of-type(2n) {
+      margin-right: 0;
+    }
+  }
+
+  @include breakpoint(large) {
+    width: 32%;
+
+    &:nth-of-type(2n+1) {
+      margin-left: auto;
+    }
+    &:nth-of-type(2n) {
+      margin-right: auto;
+    }
+    &:nth-of-type(3n+1) {
+      margin-left: 0;
+    }
+    &:nth-of-type(3n) {
+      margin-right: 0;
+    }
+  }
+
+  .card-avatar {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .card-github-icon {
+    height: 30px;
+    line-height: 30px;
+  }
+}
+
+.card-github-icons {
+  float: right;
+}
+
+.card-github-icon {
+  display: inline-block;
+  margin-left: 10px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}

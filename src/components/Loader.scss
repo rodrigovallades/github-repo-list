@@ -1,0 +1,32 @@
+@import '../styles/_variables.scss';
+@import '../styles/_mixins.scss';
+
+.app-loader {
+  width: 45px;
+  height: 45px;
+  background-color: $mainAccent;
+  border-radius: 100%;
+  -webkit-animation: sk-scaleout 600ms infinite ease-in-out;
+  animation: sk-scaleout 600ms infinite ease-in-out;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+}
+
+@-webkit-keyframes sk-scaleout {
+  0% {
+    @include transform-scale(0);
+  } 100% {
+    @include transform-scale(1.0);
+    opacity: 0;
+  }
+}
+
+@keyframes sk-scaleout {
+  0% {
+    @include transform-scale(0);
+  } 100% {
+    @include transform-scale(1.0);
+    opacity: 0;
+  }
+}
