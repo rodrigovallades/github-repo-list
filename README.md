@@ -48,8 +48,13 @@ https://developer.github.com/v3/guides/basics-of-authentication/#accepting-user-
 
 https://developer.github.com/v3/repos/#list-your-repositories
 
+---
 
 ## Getting started
+
+### Prerequisites
+
+Node.js 6+
 
 ### Installing
 ```
