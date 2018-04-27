@@ -4,32 +4,13 @@
   margin-bottom: 10px;
 
   @include breakpoint(medium) {
-    width: 49%;
-    margin: 1%;
-
-    &:nth-of-type(2n+1) {
-      margin-left: 0;
-    }
-    &:nth-of-type(2n) {
-      margin-right: 0;
-    }
+    flex: 1 0 350px;
+    margin: 5px;
+    max-width: calc(50% - 10px);
   }
 
   @include breakpoint(large) {
-    width: 32%;
-
-    &:nth-of-type(2n+1) {
-      margin-left: auto;
-    }
-    &:nth-of-type(2n) {
-      margin-right: auto;
-    }
-    &:nth-of-type(3n+1) {
-      margin-left: 0;
-    }
-    &:nth-of-type(3n) {
-      margin-right: 0;
-    }
+    max-width: calc(33% - 10px);
   }
 
   .card-avatar {
