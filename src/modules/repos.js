@@ -12,7 +12,6 @@ export default (state = initialState, action) => {
         repos: action.repos
       };
     case constants.REPOS_FAILURE:
-      console.log(action)
       return {
         ...state,
         loading: false,

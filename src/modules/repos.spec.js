@@ -8,7 +8,6 @@ const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
 describe('Repos action creators', () => {
-
   beforeEach(() => {
     fetch.resetMocks();
   });
@@ -32,11 +31,6 @@ describe('Repos action creators', () => {
 })
 
 describe('Repos reducer', () => {
-
-  beforeEach(() => {
-    fetch.resetMocks();
-  });
-
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual(initialState)
   })

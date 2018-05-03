@@ -6,5 +6,5 @@ import repos from './repos';
 export default combineReducers({
   routing: routerReducer,
   auth,
-  repos
+  repos,
 });
