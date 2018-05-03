@@ -21,7 +21,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         access_token: '',
-        loading: false
+        loading: false,
+        wrong_code: true,
       };
     default:
       return state
@@ -43,9 +44,13 @@ export const login = code => {
     return fetch(`${constants.GITHUB_MYGATEKEEPER}/authenticate/${code}`)
       .then(res => {
           res.json().then(res => {
-            dispatch(success(res.token));
-            sessionStorage.setItem('access_token', res.token);
-            history.push('/repos');
+            if (res.token) {
+              dispatch(success(res.token));
+              sessionStorage.setItem('access_token', res.token);
+              history.push('/repos');
+            } else {
+              dispatch(failure());
+            }
         });
       })
       .catch(function(error) {

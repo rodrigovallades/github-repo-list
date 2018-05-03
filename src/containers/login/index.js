@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import GitHubLogin from 'react-github-login';
-import { Grid, Jumbotron, Alert } from 'react-bootstrap';
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { Grid, Jumbotron, Alert } from 'react-bootstrap'
 import Octicon from 'react-octicon'
+import qs from 'query-string'
 
 import { login } from '../../modules/login'
 import { history } from '../../store';
@@ -13,38 +13,24 @@ import Loader from '../../components/Loader'
 import './login.css'
 
 export class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.onLoginSuccess = this.onLoginSuccess.bind(this);
-    this.onLoginFaiture = this.onLoginFaiture.bind(this);
-  }
-
   componentWillMount() {
+    const code = qs.parse(this.props.location.search).code
+    if (code) this.props.login(code)
+
     const access_token = sessionStorage.getItem('access_token')
-    if (access_token) history.push('/repos');
+    if (access_token) history.push('/repos')
   }
 
-  onLoginSuccess(res) {
-    this.props.login(res.code);
-  }
-
-  onLoginFaiture(res) {
-    console.log(res);
-  }
-
-  renderLoader() {
-    const loading = this.props.loading;
-    if (loading) {
-      return (
-        <Loader />
-      )
-    }
+  githubAuth() {
+    window.location = `https://github.com/login/oauth/authorize?client_id=${loginConstants.GITHUB_CLIENTID}&scope=&redirect_uri=${window.location.origin}`;
   }
 
   render() {
     return (
       <div>
-        {this.renderLoader()}
+        {this.props.loading && (
+          <Loader />
+        )}
         <Grid>
           <Jumbotron className='text-center github-login'>
             <h1 className="app-title display-4">GitHub's repo list</h1>
@@ -66,14 +52,13 @@ export class Login extends Component {
             </ul>
             <hr className="my-4" />
             <p className="lead">This application requires OAuth style authentication with GitHub to display the authorized users' repos.</p>
-            <GitHubLogin
-              className='login-button btn btn-primary btn-lg'
-              clientId={loginConstants.GITHUB_CLIENTID}
-              redirectUri={window.location.origin}
-              scope=''
-              onSuccess={this.onLoginSuccess}
-              onFailure={this.onLoginFailure}/>
+            <button onClick={this.githubAuth} className='login-button btn btn-primary btn-lg'>Login with GitHub</button>
           </Jumbotron>
+          {this.props.wrong_code && (
+            <Alert bsStyle="danger">
+              <Octicon name="alert"/> Invalid authentication code.
+            </Alert>
+          )}
           <Alert bsStyle="info">
             <Octicon name="info"/> Tip: Download the <strong><a href="https://github.com/zalmoxisus/redux-devtools-extension" target="_blnk">Redux DevTools</a></strong> to inspect the Redux store state.
           </Alert>
@@ -81,18 +66,19 @@ export class Login extends Component {
       </div>
     )
   }
-};
+}
 
 const mapStateToProps = state => ({
   access_token: state.auth.access_token,
-  loading: state.auth.loading
-});
+  loading: state.auth.loading,
+  wrong_code: state.auth.wrong_code,
+})
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   login
-}, dispatch);
+}, dispatch)
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login);
+)(Login)
