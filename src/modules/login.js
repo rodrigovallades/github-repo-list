@@ -3,7 +3,7 @@ import { history } from '../store'
 
 const initialState = { access_token: '', loading: false };
 
-// action creators
+// reducers
 export default (state = initialState, action) => {
   switch (action.type) {
     case loginConstants.LOGIN_REQUEST:
@@ -28,15 +28,19 @@ export default (state = initialState, action) => {
   }
 };
 
-// reducers
+// action creators
 export const login = code => {
   return dispatch => {
-    dispatch(request({ code }));
+    function request(code) { return { type: loginConstants.LOGIN_REQUEST, code } };
+    function success(token) { return { type: loginConstants.LOGIN_SUCCESS, token } };
+    function failure(error) { return { type: loginConstants.LOGIN_FAILURE, error } };
+
+    dispatch(request({ code }));   
 
     let data = new FormData()
     data.append('code', code)
 
-    fetch(`${loginConstants.GITHUB_MYGATEKEEPER}/authenticate/${code}`)
+    return fetch(`${loginConstants.GITHUB_MYGATEKEEPER}/authenticate/${code}`)
       .then(res => {
           res.json().then(res => {
             dispatch(success(res.token));
@@ -48,9 +52,5 @@ export const login = code => {
         console.error(error)
         dispatch(failure(error));
       });
-
-    function request(code) { return { type: loginConstants.LOGIN_REQUEST, code } };
-    function success(token) { return { type: loginConstants.LOGIN_SUCCESS, token } };
-    function failure(error) { return { type: loginConstants.LOGIN_FAILURE, error } };
   }
 };

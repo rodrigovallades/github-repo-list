@@ -2,7 +2,7 @@ import reposConstants from '../constants/repos.constants';
 
 const initialState = { repos: '', loading: true };
 
-// action creators
+// reducers
 export default (state = initialState, action) => {
   switch (action.type) {
     case reposConstants.REPOS_SUCCESS:
@@ -22,12 +22,16 @@ export default (state = initialState, action) => {
   }
 };
 
-// reducers
+// action creators
 export const getRepos = access_token => {
   return dispatch => {
-    dispatch(request({ access_token }));
+    function request(access_token) { return { type: reposConstants.REPOS_REQUEST, access_token } };
+    function success(repos) { return { type: reposConstants.REPOS_SUCCESS, repos } };
+    function failure(error) { return { type: reposConstants.REPOS_FAILURE, error } };
 
-    fetch(`${reposConstants.GITHUB_REPOS_API}?access_token=${access_token}&sort=updated&type=owner`)
+    dispatch(request(access_token));
+
+    return fetch(`${reposConstants.GITHUB_REPOS_API}?access_token=${access_token}&sort=updated&type=owner`)
       .then(repos => {
         repos.json().then(repos => {
           console.log(repos);
@@ -38,9 +42,5 @@ export const getRepos = access_token => {
         console.error(error)
         dispatch(failure(error));
       });
-
-    function request(access_token) { return { type: reposConstants.REPOS_REQUEST, access_token } };
-    function success(repos) { return { type: reposConstants.REPOS_SUCCESS, repos } };
-    function failure(error) { return { type: reposConstants.REPOS_FAILURE, error } };
   }
 };
