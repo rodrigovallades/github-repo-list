@@ -1,17 +1,18 @@
-import reposConstants from '../constants/repos.constants';
+import constants from '../constants/repos.constants';
 
-const initialState = { repos: '', loading: true };
+export const initialState = { repos: '', loading: true };
 
 // reducers
 export default (state = initialState, action) => {
   switch (action.type) {
-    case reposConstants.REPOS_SUCCESS:
+    case constants.REPOS_SUCCESS:
       return {
         ...state,
         loading: false,
         repos: action.repos
       };
-    case reposConstants.REPOS_FAILURE:
+    case constants.REPOS_FAILURE:
+      console.log(action)
       return {
         ...state,
         loading: false,
@@ -25,13 +26,13 @@ export default (state = initialState, action) => {
 // action creators
 export const getRepos = access_token => {
   return dispatch => {
-    function request(access_token) { return { type: reposConstants.REPOS_REQUEST, access_token } };
-    function success(repos) { return { type: reposConstants.REPOS_SUCCESS, repos } };
-    function failure(error) { return { type: reposConstants.REPOS_FAILURE, error } };
+    function request(access_token) { return { type: constants.REPOS_REQUEST, access_token } };
+    function success(repos) { return { type: constants.REPOS_SUCCESS, repos } };
+    function failure(error) { return { type: constants.REPOS_FAILURE, error } };
 
     dispatch(request(access_token));
 
-    return fetch(`${reposConstants.GITHUB_REPOS_API}?access_token=${access_token}&sort=updated&type=owner`)
+    return fetch(`${constants.GITHUB_REPOS_API}?access_token=${access_token}&sort=updated&type=owner`)
       .then(repos => {
         repos.json().then(repos => {
           console.log(repos);

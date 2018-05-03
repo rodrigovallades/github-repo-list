@@ -1,22 +1,24 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
-import reposConstants from '../constants/repos.constants';
-import { getRepos } from './repos'
+import constants from '../constants/repos.constants';
+import reducer, { getRepos, initialState } from './repos'
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
-const initialState = { repos: '', loading: true };
 
 describe('Repos action creators', () => {
+
+  beforeEach(() => {
+    fetch.resetMocks();
+  });
+
   it('dispatches the correct actions on successful fetch request', () => {
-    fetch.mockResponse(JSON.stringify([{
-      name: 'repo1'}
-    ]))
+    fetch.mockResponse(JSON.stringify([ { name: 'repo1'} ]))
 
     const expectedActions = [
-      { type: reposConstants.REPOS_REQUEST, access_token: '1234'},
-      { type: reposConstants.REPOS_SUCCESS, repos: [{name: 'repo1'}] }
+      { type: constants.REPOS_REQUEST, access_token: '1234'},
+      { type: constants.REPOS_SUCCESS, repos: [{name: 'repo1'}] }
     ]
     const store = mockStore(initialState)
     return (
@@ -25,6 +27,43 @@ describe('Repos action creators', () => {
         .then(() => {
           expect(store.getActions()).toEqual(expectedActions)
         })
+    )
+  })
+})
+
+describe('Repos reducer', () => {
+
+  beforeEach(() => {
+    fetch.resetMocks();
+  });
+
+  it('should return the initial state', () => {
+    expect(reducer(undefined, {})).toEqual(initialState)
+  })
+
+  it(`should handle ${constants.REPOS_SUCCESS}`, () => {
+    expect(
+      reducer({}, {
+        type: constants.REPOS_SUCCESS,
+        repos: [{ name: 'repo1'}],
+      })
+    ).toEqual(
+      {
+        repos: [{ name: 'repo1'}],
+        loading: false,
+      }
+    )
+  })
+  it(`should handle ${constants.REPOS_FAILURE}`, () => {
+    expect(
+      reducer({}, {
+        type: constants.REPOS_FAILURE
+      })
+    ).toEqual(
+      {
+        repos: '',
+        loading: false,
+      }
     )
   })
 })
