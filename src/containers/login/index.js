@@ -14,7 +14,12 @@ import './login.css'
 
 export class Login extends Component {
   componentWillMount() {
-    const code = qs.parse(this.props.location.search).code
+    let code = ''
+
+    if (this.props.location && this.props.location.search) {
+      code = qs.parse(this.props.location.search).code
+    }
+
     if (code) this.props.login(code)
 
     const access_token = sessionStorage.getItem('access_token')

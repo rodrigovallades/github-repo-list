@@ -13,6 +13,6 @@ describe('Login container', function () {
 
   it('renders "Login" component', () => {
     const component = shallow(<Login/>);
-  expect(component.exists()).toEqual(true);
+    expect(component.exists()).toEqual(true);
   });
 })

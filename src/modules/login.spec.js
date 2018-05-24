@@ -60,6 +60,7 @@ describe('Login reducer', () => {
       {
         access_token: '',
         loading: false,
+        wrong_code: true,
       }
     )
   })
