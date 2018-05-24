@@ -32,7 +32,7 @@ export const getCommits = access_token => {
 
     dispatch(request(access_token));
 
-    return fetch(`${github.API_URL}/repos/rodrigovallades/github-repo-list/commits`)
+    return fetch(`${github.API_URL}/repos/rodrigovallades/github-repo-list/commits?per_page=100`)
       .then(commits => {
         commits.json().then(commits => {
           console.log(commits);
