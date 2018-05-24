@@ -6,6 +6,12 @@ export const initialState = { commits: [], loading: true };
 // reducers
 export default (state = initialState, action) => {
   switch (action.type) {
+    case constants.COMMITS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        commits: []
+      };
     case constants.COMMITS_SUCCESS:
       return {
         ...state,
@@ -16,7 +22,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        commits: ''
+        commits: []
       };
     default:
       return state

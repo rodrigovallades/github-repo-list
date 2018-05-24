@@ -5,6 +5,12 @@ export const initialState = { repos: [], loading: true };
 // reducers
 export default (state = initialState, action) => {
   switch (action.type) {
+    case constants.REPOS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        repos: []
+      };
     case constants.REPOS_SUCCESS:
       return {
         ...state,
@@ -15,7 +21,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        repos: ''
+        repos: []
       };
     default:
       return state
