@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Grid } from 'react-bootstrap'
+import { Grid, Alert } from 'react-bootstrap'
+import Octicon from 'react-octicon'
 
 import { getCommits } from '../../modules/commits'
 import { history } from '../../store'
@@ -73,6 +74,9 @@ export class Commits extends Component {
           <div className='list-group commits'>
             {this.renderCommits()}
           </div>
+          <Alert bsStyle="info">
+            <Octicon name="info"/> Tip: Download the <strong><a href="https://github.com/zalmoxisus/redux-devtools-extension" target="_blnk">Redux DevTools</a></strong> to inspect the Redux store state.
+          </Alert>
         </Grid>
       </div>
     )

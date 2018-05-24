@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Grid } from 'react-bootstrap';
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { Grid, Alert } from 'react-bootstrap'
+import Octicon from 'react-octicon'
 
-import { getRepos } from '../../modules/repos';
-import { history } from '../../store';
+import { getRepos } from '../../modules/repos'
+import { history } from '../../store'
 import RepoCard from '../../components/RepoCard'
 import Loader from '../../components/Loader'
 
@@ -60,7 +61,7 @@ export class Repos extends Component {
       )
     })
   }
-  
+
   render() {
     return (
       <div>
@@ -72,6 +73,9 @@ export class Repos extends Component {
           <div className='repos'>
             {this.renderRepos()}
           </div>
+          <Alert bsStyle="info">
+            <Octicon name="info"/> Tip: Download the <strong><a href="https://github.com/zalmoxisus/redux-devtools-extension" target="_blnk">Redux DevTools</a></strong> to inspect the Redux store state.
+          </Alert>
         </Grid>
       </div>
     )
