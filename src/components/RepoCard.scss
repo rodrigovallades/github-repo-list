@@ -2,6 +2,7 @@
 
 .repos__repo {
   margin-bottom: 10px;
+  cursor: pointer;
 
   @include breakpoint(medium) {
     flex: 1 0 350px;

@@ -32,6 +32,10 @@ export class Repos extends Component {
     this.setState({ repos: props.repos })
   }
 
+  selectRepo(owner, repo) {
+    history.push(`/${owner}/${repo}/commits`);
+  }
+
   renderRepos() {
     const repos = this.props.repos ? this.props.repos : [];
     if (!repos.length) {
@@ -50,24 +54,19 @@ export class Repos extends Component {
           login={repo.owner.login}
           stargazers_count={repo.stargazers_count}
           forks_count={repo.forks_count}
-          watchers_count={repo.watchers_count} />
+          watchers_count={repo.watchers_count}
+          onClick={() => this.selectRepo(repo.owner.login, repo.name)}
+        />
       )
     })
   }
-
-  renderLoader() {
-    const loading = this.props.loading;
-    if (loading) {
-      return (
-        <Loader />
-      )
-    }
-  }
-
+  
   render() {
     return (
       <div>
-        {this.renderLoader()}
+        {this.props.loading && (
+          <Loader />
+        )}
         <Grid>
           <h1 className="display-4">Repos <span className="badge badge-light">{this.state.repos.length}</span></h1>
           <div className='repos'>

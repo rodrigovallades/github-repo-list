@@ -1,7 +1,6 @@
-import github from '../constants/github.constants';
 import constants from '../constants/repos.constants';
 
-export const initialState = { repos: '', loading: true };
+export const initialState = { repos: [], loading: true };
 
 // reducers
 export default (state = initialState, action) => {
@@ -34,7 +33,7 @@ export const getRepos = access_token => {
 
     return fetch(`${constants.GITHUB_REPOS_API}?access_token=${access_token}&sort=updated&type=owner`)
       .then(repos => {
-        repos.json().then(repos => {          
+        repos.json().then(repos => {
           dispatch(success(repos));
         })
       })

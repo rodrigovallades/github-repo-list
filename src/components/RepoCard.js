@@ -4,7 +4,7 @@ import Octicon from 'react-octicon'
 import './RepoCard.css'
 
 export default props => (
-  <div key={props.index} className="card repos__repo">
+  <div key={props.index} className="card repos__repo" onClick={props.onClick}>
     <div className="card-body">
       <h5 className="card-title"><a href={props.html_url} target="_blank">{props.name}</a></h5>
       <p className="card-text">{props.description}</p>
