@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Grid } from 'react-bootstrap'
-import Octicon from 'react-octicon'
 
 import { getCommits } from '../../modules/commits'
 import { history } from '../../store'
@@ -22,11 +21,12 @@ export class Commits extends Component {
   componentWillMount() {
     const access_token = sessionStorage.getItem('access_token')
 
-    if (access_token) {
-      this.props.getCommits(access_token)
-    } else {
-      history.push('/');
-    }
+    if (!access_token) history.push('/')
+  }
+
+  componentDidMount() {
+    const { match: { params } } = this.props
+    this.props.getCommits(params)
   }
 
   componentWillReceiveProps(props){
@@ -42,15 +42,23 @@ export class Commits extends Component {
       )
     }
     return commits.map((commit, index) => {
-      return (
-        <Commit
-          key={index}
-          date={commit.commit.author.date}
-          avatar_url={commit.author.avatar_url}
-          login={commit.author.login}
-          html_url={commit.html_url}
-          message={commit.commit.message} />
-      )
+
+      const date = commit.commit.author.date === null ? '' : commit.commit.author.date,
+            avatar_url = commit.author === null || commit.author.avatar_url === null ? '' : commit.author.avatar_url,
+            login = commit.commit.author.login === null ? '' : commit.commit.author.login,
+            html_url = commit.html_url === null ? '' : commit.html_url,
+            message = commit.commit.message === null ? '' : commit.commit.message;
+
+        return (
+          <Commit
+            key={index}
+            date={date}
+            avatar_url={avatar_url}
+            login={login}
+            html_url={html_url}
+            message={message} />
+        )
+
     })
   }
 

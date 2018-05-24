@@ -24,18 +24,17 @@ export default (state = initialState, action) => {
 };
 
 // action creators
-export const getCommits = access_token => {
+export const getCommits = params => {
   return dispatch => {
-    function request(access_token) { return { type: constants.COMMITS_REQUEST, access_token } };
+    function request(params) { return { type: constants.COMMITS_REQUEST, params } };
     function success(commits) { return { type: constants.COMMITS_SUCCESS, commits } };
     function failure(error) { return { type: constants.COMMITS_FAILURE, error } };
 
-    dispatch(request(access_token));
+    dispatch(request(params));
 
-    return fetch(`${github.API_URL}/repos/rodrigovallades/github-repo-list/commits?per_page=100`)
+    return fetch(`${github.API_URL}/repos/${params.owner}/${params.repo}/commits?per_page=100`)
       .then(commits => {
-        commits.json().then(commits => {
-          console.log(commits);
+        commits.json().then(commits => {          
           dispatch(success(commits));
         })
       })
