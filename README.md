@@ -13,14 +13,14 @@ https://react-github-repo-list.herokuapp.com/
 ## Technologies, techniques and best practices used
 
 - [x] React 16 + Redux 5 + React-Router 4
-- [x] Tests with Jest + Enzyme
-- [x] ES6
+- [x] ES6 (modules, consts, lets, arrow functions, template strings...)
 - [x] Persisting OAuth token with sessionStorage
+- [x] Tests with Jest + Enzyme
 - [x] SCSS
-- [x] Flexbox
-- [x] Bootstrap 4
 - [x] BEM CSS naming
+- [x] Flexbox
 - [x] Mobile-first approach
+- [x] Bootstrap 4
 
 # Front-end test assignment
 
