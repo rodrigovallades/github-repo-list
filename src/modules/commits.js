@@ -32,9 +32,9 @@ export const getCommits = params => {
 
     dispatch(request(params));
 
-    return fetch(`${github.API_URL}/repos/${params.owner}/${params.repo}/commits?per_page=100`)
+    return fetch(`${github.API_URL}/repos/${params.owner}/${params.repo}/commits?per_page=${github.LIMIT}`)
       .then(commits => {
-        commits.json().then(commits => {          
+        commits.json().then(commits => {
           dispatch(success(commits));
         })
       })
