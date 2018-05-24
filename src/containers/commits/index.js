@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Grid, Alert } from 'react-bootstrap'
 import Octicon from 'react-octicon'
 
@@ -19,9 +20,8 @@ export class Commits extends Component {
     };
   }
 
-  componentWillMount() {
+  componentWillMount() {    
     const access_token = sessionStorage.getItem('access_token')
-
     if (!access_token) history.push('/')
   }
 
@@ -29,11 +29,6 @@ export class Commits extends Component {
     const { match: { params } } = this.props
     this.props.getCommits(params)
   }
-
-  componentWillReceiveProps(props){
-    this.setState({ commits: props.commits })
-  }
-
 
   renderCommits() {
     const commits = this.props.commits ? this.props.commits : [];
@@ -70,7 +65,7 @@ export class Commits extends Component {
           <Loader />
         )}
         <Grid>
-          <h1 className="display-4"><span className="float-right"><small><a href="/repos">&lt; repos</a></small></span> Commits <span className="badge badge-light">{this.state.commits.length}</span></h1>
+          <h1 className="display-4"><span className="float-right"><small><Link to="/repos">&lt; repos</Link></small></span> Commits <span className="badge badge-light">{this.state.commits.length}</span></h1>
           <div className='list-group commits'>
             {this.renderCommits()}
           </div>
