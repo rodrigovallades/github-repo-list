@@ -1,6 +1,7 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
+import github from '../constants/github.constants';
 import constants from '../constants/repos.constants';
 import reducer, { getRepos, initialState } from './repos'
 
@@ -11,6 +12,10 @@ describe('Repos action creators', () => {
   beforeEach(() => {
     fetch.resetMocks();
   });
+
+  it('calls the correct Github endpoint', () => {
+    expect(constants.GITHUB_REPOS_API).toEqual('https://api.github.com/user/repos')
+  })
 
   it('dispatches the correct actions on successful fetch request', () => {
     fetch.mockResponse(JSON.stringify([ { name: 'repo1'} ]))
