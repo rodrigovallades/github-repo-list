@@ -1,6 +1,6 @@
 export default  {
-  GITHUB_CLIENTID: 'e116002180227370db26',
-  GITHUB_MYGATEKEEPER: 'https://github-repo-list.herokuapp.com',
+  GITHUB_CLIENTID: '16e826e35bff39755d20',
+  GITHUB_MYGATEKEEPER: 'https://github-repo-list-prod.herokuapp.com',
   LOGIN_REQUEST: 'USER_LOGIN_REQUEST',
   LOGIN_SUCCESS: 'USER_LOGIN_SUCCESS',
   LOGIN_FAILURE: 'USER_LOGIN_FAILURE'
