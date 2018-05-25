@@ -7,11 +7,12 @@
   @include breakpoint(medium) {
     flex: 1 0 350px;
     margin: 5px;
-    max-width: calc(50% - 10px);
+    width: 50%;
   }
 
   @include breakpoint(large) {
-    max-width: calc(33% - 10px);
+    flex-grow: 1;
+    width: 33%;
   }
 
   .card-avatar {
