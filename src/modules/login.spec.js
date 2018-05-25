@@ -38,6 +38,18 @@ describe('Login reducer', () => {
     expect(reducer(undefined, {})).toEqual(initialState)
   })
 
+  it(`should handle ${constants.LOGIN_REQUEST}`, () => {
+    expect(
+      reducer({}, {
+        type: constants.LOGIN_REQUEST,
+        loading: true,
+      })
+    ).toEqual(
+      {        
+        loading: true,
+      }
+    )
+  })
   it(`should handle ${constants.LOGIN_SUCCESS}`, () => {
     expect(
       reducer({}, {

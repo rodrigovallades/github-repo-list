@@ -2,32 +2,28 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
 import github from '../constants/github.constants';
-import constants from '../constants/repos.constants';
-import reducer, { getRepos, initialState } from './repos'
+import constants from '../constants/commits.constants';
+import reducer, { getCommits, initialState } from './commits'
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
-describe('Repos action creators', () => {
+describe('Commits action creators', () => {
   beforeEach(() => {
     fetch.resetMocks();
   });
 
-  it('calls the correct Github endpoint', () => {
-    expect(constants.GITHUB_REPOS_API).toEqual('https://api.github.com/user/repos')
-  })
-
   it('dispatches the correct actions on successful fetch request', () => {
-    fetch.mockResponse(JSON.stringify([ { name: 'repo1'} ]))
+    fetch.mockResponse(JSON.stringify([ { name: 'commit1'} ]))
 
     const expectedActions = [
-      { type: constants.REPOS_REQUEST, access_token: '1234'},
-      { type: constants.REPOS_SUCCESS, repos: [{name: 'repo1'}] }
+      { type: constants.COMMITS_REQUEST, params: {owner: 'testuser', repo: 'testrepo'}},
+      { type: constants.COMMITS_SUCCESS, commits: [{name: 'commit1'}] }
     ]
     const store = mockStore(initialState)
     return (
       store
-        .dispatch(getRepos('1234'))
+        .dispatch(getCommits({owner: 'testuser', repo: 'testrepo'}))
         .then(() => {
           expect(store.getActions()).toEqual(expectedActions)
         })
@@ -35,45 +31,45 @@ describe('Repos action creators', () => {
   })
 })
 
-describe('Repos reducer', () => {
+describe('Commits reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual(initialState)
   })
 
-  it(`should handle ${constants.REPOS_REQUEST}`, () => {
+  it(`should handle ${constants.COMMITS_REQUEST}`, () => {
     expect(
       reducer({}, {
-        type: constants.REPOS_REQUEST,
-        repos: [],        
+        type: constants.COMMITS_REQUEST,
+        commits: [],
       })
     ).toEqual(
       {
-        repos: [],
+        commits: [],
         loading: true,
       }
     )
   })
-  it(`should handle ${constants.REPOS_SUCCESS}`, () => {
+  it(`should handle ${constants.COMMITS_SUCCESS}`, () => {
     expect(
       reducer({}, {
-        type: constants.REPOS_SUCCESS,
-        repos: [{ name: 'repo1'}],
+        type: constants.COMMITS_SUCCESS,
+        commits: [{ name: 'commit1'}],
       })
     ).toEqual(
       {
-        repos: [{ name: 'repo1'}],
+        commits: [{ name: 'commit1'}],
         loading: false,
       }
     )
   })
-  it(`should handle ${constants.REPOS_FAILURE}`, () => {
+  it(`should handle ${constants.COMMITS_FAILURE}`, () => {
     expect(
       reducer({}, {
-        type: constants.REPOS_FAILURE
+        type: constants.COMMITS_FAILURE
       })
     ).toEqual(
       {
-        repos: [],
+        commits: [],
         loading: false,
       }
     )
