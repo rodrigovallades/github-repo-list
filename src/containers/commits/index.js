@@ -9,6 +9,8 @@ import { getCommits } from '../../modules/commits'
 import { history } from '../../store'
 import Commit from '../../components/Commit'
 import Loader from '../../components/Loader'
+import { Filter } from '../../components/Filter'
+
 
 import './commits.css'
 
@@ -16,11 +18,12 @@ export class Commits extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      commits: []
+      commits: [],
+      filter: ''
     };
   }
 
-  componentWillMount() {    
+  componentWillMount() {
     const access_token = sessionStorage.getItem('access_token')
     if (!access_token) history.push('/')
   }
@@ -30,31 +33,47 @@ export class Commits extends Component {
     this.props.getCommits(params)
   }
 
+  componentWillReceiveProps(props){
+    this.setState((prevState, props) => ({
+      commits: props.commits
+    }));
+  }
+
+  updateSearch(inputValue) {
+    this.setState({
+      filter: inputValue
+    });
+  }
+
+  filter(commits) {
+    if (!this.state.filter) {
+      return commits
+    }
+    return commits.filter(commit => commit.commit.message.toLowerCase().indexOf(this.state.filter.toLowerCase()) >= 0);
+  }
+
   renderCommits() {
-    const commits = this.props.commits ? this.props.commits : [];
-    if (!commits.length) {
+    if (!this.state.commits.length) {
       return (
         <p>No commits found in this repository.</p>
       )
     }
-    return commits.map((commit, index) => {
-
+    return this.filter(this.state.commits).map((commit, index) => {
       const date = commit.commit.author.date === null ? '' : commit.commit.author.date,
             avatar_url = commit.author === null || commit.author.avatar_url === null ? '' : commit.author.avatar_url,
             login = commit.commit.author.login === null ? '' : commit.commit.author.login,
             html_url = commit.html_url === null ? '' : commit.html_url,
             message = commit.commit.message === null ? '' : commit.commit.message;
 
-        return (
-          <Commit
-            key={index}
-            date={date}
-            avatar_url={avatar_url}
-            login={login}
-            html_url={html_url}
-            message={message} />
-        )
-
+      return (
+        <Commit
+          key={index}
+          date={date}
+          avatar_url={avatar_url}
+          login={login}
+          html_url={html_url}
+          message={message} />
+      )
     })
   }
 
@@ -65,7 +84,8 @@ export class Commits extends Component {
           <Loader />
         )}
         <Grid>
-          <h1 className="display-4"><span className="float-right"><small><Link to="/repos">&lt; repos</Link></small></span> Commits <span className="badge badge-light">{this.state.commits.length}</span></h1>
+          <h1 className="display-4"><span className="float-right"><small><Link to="/repos">&lt; repos</Link></small></span> Commits <span className="badge badge-light">{this.filter(this.state.commits).length}</span></h1>
+          <Filter updateSearch={this.updateSearch.bind(this)} searchText={this.state.filter} placeholder='Filter commits' />
           <div className='list-group commits'>
             {this.renderCommits()}
           </div>

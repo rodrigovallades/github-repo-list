@@ -8,6 +8,7 @@ import { getRepos } from '../../modules/repos'
 import { history } from '../../store'
 import RepoCard from '../../components/RepoCard'
 import Loader from '../../components/Loader'
+import { Filter } from '../../components/Filter'
 
 import './repos.css'
 
@@ -15,7 +16,8 @@ export class Repos extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      repos: []
+      repos: [],
+      filter: ''
     };
   }
 
@@ -30,21 +32,36 @@ export class Repos extends Component {
   }
 
   componentWillReceiveProps(props){
-    this.setState({ repos: props.repos })
+    this.setState((prevState, props) => ({
+      repos: props.repos
+    }));
   }
 
   selectRepo(owner, repo) {
     history.push(`/${owner}/${repo}/commits`);
   }
 
+  updateSearch(inputValue) {
+    this.setState({
+      filter: inputValue
+    });
+  }
+
+  filter(repos) {
+    if (!this.state.filter) {
+      return repos
+    }
+    return repos.filter(repo => repo.name.toLowerCase().indexOf(this.state.filter.toLowerCase()) >= 0)
+  }
+
   renderRepos() {
-    const repos = this.props.repos ? this.props.repos : [];
-    if (!repos.length) {
+    if (!this.state.repos.length) {
       return (
         <p>No repos found in this account.</p>
       )
     }
-    return repos.map((repo, index) => {
+
+    return this.filter(this.state.repos).map((repo, index) => {
       return (
         <RepoCard
           key={index}
@@ -69,7 +86,8 @@ export class Repos extends Component {
           <Loader />
         )}
         <Grid>
-          <h1 className="display-4">Repos <span className="badge badge-light">{this.state.repos.length}</span></h1>
+          <h1 className="display-4">Repos <span className="badge badge-light">{this.filter(this.state.repos).length}</span></h1>
+          <Filter updateSearch={this.updateSearch.bind(this)} searchText={this.state.filter} placeholder='Filter repository' />
           <div className='repos'>
             {this.renderRepos()}
           </div>
