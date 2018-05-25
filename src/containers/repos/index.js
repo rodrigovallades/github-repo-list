@@ -86,7 +86,7 @@ export class Repos extends Component {
           <Loader />
         )}
         <Grid>
-          <h1 className="display-4">Repos <span className="badge badge-light">{this.filter(this.state.repos).length}</span></h1>
+          <h1 className="title"><span className="badge badge-light">{this.filter(this.state.repos).length}</span> Repositories</h1>
           <Filter updateSearch={this.updateSearch.bind(this)} searchText={this.state.filter} placeholder='Filter repository' />
           <div className='repos'>
             {this.renderRepos()}

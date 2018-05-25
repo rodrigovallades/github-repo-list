@@ -19,6 +19,7 @@ export class Commits extends Component {
     super(props);
     this.state = {
       commits: [],
+      repo: '',
       filter: ''
     };
   }
@@ -30,6 +31,7 @@ export class Commits extends Component {
 
   componentDidMount() {
     const { match: { params } } = this.props
+    this.setState({ repo: params.repo });
     this.props.getCommits(params)
   }
 
@@ -84,7 +86,7 @@ export class Commits extends Component {
           <Loader />
         )}
         <Grid>
-          <h1 className="display-4"><span className="float-right"><small><Link to="/repos">&lt; repos</Link></small></span> Commits <span className="badge badge-light">{this.filter(this.state.commits).length}</span></h1>
+          <h1 className="title"><span className="float-right"><small><Link to="/repos">&lt; repos</Link></small></span> <span className="badge badge-light">{this.filter(this.state.commits).length}</span> {this.state.repo} <small class="text-muted">commits</small></h1>
           <Filter updateSearch={this.updateSearch.bind(this)} searchText={this.state.filter} placeholder='Filter commits' />
           <div className='list-group commits'>
             {this.renderCommits()}
