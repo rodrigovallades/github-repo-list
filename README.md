@@ -22,6 +22,44 @@ https://react-github-repo-list.herokuapp.com/
 - [x] Mobile-first approach
 - [x] Bootstrap 4
 
+---
+## Getting started
+
+### Prerequisites
+
+Node.js 6+
+
+### Installing
+```
+npm install
+```
+
+### Development (run locally)
+```
+npm start
+```
+
+### Run tests
+```
+npm test
+```
+---
+## Comments
+
+### You can view the redux store using Redux DevTools Chrome extension
+![Redux store](./docs/redux.png)
+
+### I prepared a whole suite of tests
+![Tests](./docs/tests.png)
+
+### Session storage keeps the Github token active
+![Session storage](./docs/session_storage.png)
+
+### The website is responsive, uses flexbox, atomic CSS (BEM) and is mobile-first
+![Responsive view](./docs/mobile_first.png)
+
+---
+
 # Front-end test assignment
 
 ## What is expected
@@ -57,33 +95,7 @@ Feel free to choose if you are going to use the Rest API or the GraphQL API, and
 - **Don't** fork this project. Create a new repository in your account and send us the URL;
 - Create a readme file with the instructions to run the project and the tests, and add any comment that you think is relevant.
 
----
 
-## Getting started
-
-### Prerequisites
-
-Node.js 6+
-
-### Installing
-```
-npm install
-```
-
-### Development (run locally)
-```
-npm start
-```
-
-### Build for production (minify, etc)
-```
-npm run build
-```
-
-### Run tests
-```
-npm test
-```
 
 
 Thank you,
