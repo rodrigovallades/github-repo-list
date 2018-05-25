@@ -1,7 +1,7 @@
 @import '../../styles/_mixins.scss';
 
-.repos {
-  margin-top: 10px;
+div.repos {
+  margin: 10px 0;
 
   @include breakpoint(medium) {
     display: flex;

@@ -61,7 +61,7 @@ export class Commits extends Component {
     return this.filter(this.state.commits).map((commit, index) => {
       const date = commit.commit.author.date === null ? '' : commit.commit.author.date,
             avatar_url = commit.author === null || commit.author.avatar_url === null ? '' : commit.author.avatar_url,
-            login = commit.commit.author.login === null ? '' : commit.commit.author.login,
+            login = commit.commit.author.name === null ? '' : commit.commit.author.name,
             html_url = commit.html_url === null ? '' : commit.html_url,
             message = commit.commit.message === null ? '' : commit.commit.message;
 
