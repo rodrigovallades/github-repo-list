@@ -30,7 +30,7 @@ export class Commits extends Component {
   }
 
   componentDidMount() {
-    const { match: { params } } = this.props
+    const { params } = this.props.match
     this.setState({ repo: params.repo });
     this.props.getCommits(params)
   }
@@ -97,6 +97,13 @@ export class Commits extends Component {
         </Grid>
       </div>
     )
+  }
+};
+
+Commits.defaultProps = {
+  getCommits: function(){},
+  match: {
+    params: ''
   }
 };
 

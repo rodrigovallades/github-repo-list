@@ -1,6 +1,6 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import renderer from 'react-test-renderer';
+import React from 'react'
+import { shallow } from 'enzyme'
+import renderer from 'react-test-renderer'
 
 import { Repos } from './index'
 
@@ -11,7 +11,12 @@ describe('Repos container', function () {
     global.sessionStorage.getItem = jest.genMockFunction();
   });
 
-  it('renders "Repos" component', () => {
+  it('renders "Repos" deep correctly', () => {
+    const tree = renderer.create(<Repos/>);
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders "Repos" shallow correctly', () => {
     const component = shallow(<Repos/>);
     expect(component.exists()).toEqual(true);
   });

@@ -1,0 +1,150 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login container renders "Login" deep correctly 1`] = `
+<div>
+  <div
+    className="container"
+  >
+    <div
+      className="text-center github-login jumbotron"
+    >
+      <h1
+        className="app-title display-4"
+      >
+        GitHub's repo list challenge
+      </h1>
+      <p
+        className="lead"
+      >
+        by Rodrigo Vallades
+      </p>
+      <h4>
+        Tech stack
+      </h4>
+      <ul
+        className="list-inline"
+      >
+        <li
+          className="list-inline-item"
+        >
+          <span
+            className="octicon octicon-check"
+          />
+           React 16
+        </li>
+        <li
+          className="list-inline-item"
+        >
+          <span
+            className="octicon octicon-check"
+          />
+           Redux 5
+        </li>
+        <li
+          className="list-inline-item"
+        >
+          <span
+            className="octicon octicon-check"
+          />
+           Router 4
+        </li>
+        <li
+          className="list-inline-item"
+        >
+          <span
+            className="octicon octicon-check"
+          />
+           Bootstrap 4
+        </li>
+        <li
+          className="list-inline-item"
+        >
+          <span
+            className="octicon octicon-check"
+          />
+           Webpack 4
+        </li>
+        <li
+          className="list-inline-item"
+        >
+          <span
+            className="octicon octicon-check"
+          />
+           ES6
+        </li>
+        <li
+          className="list-inline-item"
+        >
+          <span
+            className="octicon octicon-check"
+          />
+           SCSS
+        </li>
+      </ul>
+      <h4>
+        Techniques and good practices
+      </h4>
+      <ul
+        className="list-inline"
+      >
+        <li
+          className="list-inline-item"
+        >
+          <span
+            className="octicon octicon-check"
+          />
+           BEM
+        </li>
+        <li
+          className="list-inline-item"
+        >
+          <span
+            className="octicon octicon-check"
+          />
+           Custom responsive CSS (SCSS + Flexbox)
+        </li>
+        <li
+          className="list-inline-item"
+        >
+          <span
+            className="octicon octicon-check"
+          />
+           Mobile-first
+        </li>
+      </ul>
+      <hr
+        className="my-4"
+      />
+      <p
+        className="lead"
+      >
+        This application requires OAuth style authentication with GitHub to display the authorized users' repos.
+      </p>
+      <button
+        className="login-button btn btn-primary btn-lg"
+        onClick={[Function]}
+      >
+        Login with GitHub
+      </button>
+    </div>
+    <div
+      className="alert alert-info"
+      role="alert"
+    >
+      <span
+        className="octicon octicon-info"
+      />
+       Tip: Download the 
+      <strong>
+        <a
+          href="https://github.com/zalmoxisus/redux-devtools-extension"
+          target="_blnk"
+        >
+          Redux DevTools
+        </a>
+      </strong>
+       to inspect the Redux store state.
+    </div>
+  </div>
+</div>
+`;

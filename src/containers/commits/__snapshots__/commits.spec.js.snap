@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Commits container renders "Commits" deep correctly 1`] = `
+<div>
+  <div
+    className="container"
+  >
+    <h1
+      className="title"
+    >
+      <span
+        className="float-right"
+      >
+        <small>
+          <Link
+            to="/repos"
+          >
+            &lt; repos
+          </Link>
+        </small>
+      </span>
+       
+      <span
+        className="badge badge-light"
+      >
+        0
+      </span>
+       
+       
+      <small
+        className="text-muted"
+      >
+        commits
+      </small>
+    </h1>
+    <input
+      className="filter form-control"
+      onChange={[Function]}
+      placeholder="Filter commits"
+      type="text"
+      value=""
+    />
+    <div
+      className="list-group commits"
+    >
+      <p>
+        No commits found in this repository.
+      </p>
+    </div>
+    <div
+      className="alert alert-info"
+      role="alert"
+    >
+      <span
+        className="octicon octicon-info"
+      />
+       Tip: Download the 
+      <strong>
+        <a
+          href="https://github.com/zalmoxisus/redux-devtools-extension"
+          target="_blnk"
+        >
+          Redux DevTools
+        </a>
+      </strong>
+       to inspect the Redux store state.
+    </div>
+  </div>
+</div>
+`;
