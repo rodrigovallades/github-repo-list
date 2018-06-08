@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 
 import github from '../constants/github.constants';
 import constants from '../constants/repos.constants';
-import reducer, { getRepos, initialState } from './repos'
+import reducer, { getRepos, initialState, commitsFilter } from './repos'
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
@@ -44,7 +44,7 @@ describe('Repos reducer', () => {
     expect(
       reducer({}, {
         type: constants.REPOS_REQUEST,
-        repos: [],        
+        repos: [],
       })
     ).toEqual(
       {
@@ -75,6 +75,18 @@ describe('Repos reducer', () => {
       {
         repos: [],
         loading: false,
+      }
+    )
+  })
+  it(`should handle ${commitsFilter.UPDATE_TEXT}`, () => {
+    expect(
+      reducer({}, {
+        type: commitsFilter.UPDATE_TEXT,
+        filter: 'commit name'
+      })
+    ).toEqual(
+      {
+        filter: 'commit name'
       }
     )
   })

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Grid, Alert } from 'react-bootstrap'
 import Octicon from 'react-octicon'
 
-import { getRepos } from '../../modules/repos'
+import { getRepos, setFilter } from '../../modules/repos'
 import { history } from '../../store'
 import RepoCard from '../../components/RepoCard'
 import Loader from '../../components/Loader'
@@ -13,55 +13,36 @@ import { Filter } from '../../components/Filter'
 import './repos.css'
 
 export class Repos extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      repos: [],
-      filter: ''
-    };
-  }
 
   componentWillMount() {
     const access_token = sessionStorage.getItem('access_token')
 
     if (access_token) {
-      this.props.getRepos(access_token)
+      if (!this.props.repos.length) {
+        this.props.getRepos(access_token)
+      }
     } else {
       history.push('/');
     }
-  }
-
-  componentWillReceiveProps(props){
-    this.setState((prevState, props) => ({
-      repos: props.repos
-    }));
   }
 
   selectRepo(owner, repo) {
     history.push(`/${owner}/${repo}/commits`);
   }
 
-  updateSearch(inputValue) {
-    this.setState({
-      filter: inputValue
-    });
-  }
-
   filter(repos) {
-    if (!this.state.filter) {
-      return repos
-    }
-    return repos.filter(repo => repo.name.toLowerCase().indexOf(this.state.filter.toLowerCase()) >= 0)
+    const filter = this.props.filter || '';
+    return repos.filter(repo => repo.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0)
   }
 
   renderRepos() {
-    if (!this.state.repos.length) {
+    if (!this.props.repos.length) {
       return (
         <p>No repos found in this account.</p>
       )
     }
 
-    return this.filter(this.state.repos).map((repo, index) => {
+    return this.filter(this.props.repos).map((repo, index) => {
       return (
         <RepoCard
           key={index}
@@ -86,8 +67,8 @@ export class Repos extends Component {
           <Loader />
         )}
         <Grid>
-          <h1 className="title"><span className="badge badge-light">{this.filter(this.state.repos).length}</span> Repositories</h1>
-          <Filter updateSearch={this.updateSearch.bind(this)} searchText={this.state.filter} placeholder='Filter repository' />
+          <h1 className="title"><span className="badge badge-light">{this.filter(this.props.repos).length}</span> Repositories</h1>
+          <Filter updateSearch={this.props.setFilter.bind(this.props.this)} searchText={this.props.filter} placeholder='Filter repository' />
           <div className='repos'>
             {this.renderRepos()}
           </div>
@@ -100,13 +81,21 @@ export class Repos extends Component {
   }
 };
 
+Repos.defaultProps = {
+  setFilter: function(){},
+  repos: [],
+  filter: ''
+};
+
 const mapStateToProps = state => ({
   repos: state.repos.repos,
-  loading: state.repos.loading
+  loading: state.repos.loading,
+  filter: state.repos.filter
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getRepos
+  getRepos,
+  setFilter
 }, dispatch);
 
 export default connect(

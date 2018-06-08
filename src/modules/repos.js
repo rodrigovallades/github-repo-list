@@ -1,6 +1,10 @@
 import constants from '../constants/repos.constants';
 
-export const initialState = { repos: [], loading: true };
+export const initialState = { repos: [], filter: '', loading: true };
+
+export const commitsFilter = {
+  UPDATE_TEXT: 'COMMITS_FILTER_UPDATE'
+}
 
 // reducers
 export default (state = initialState, action) => {
@@ -22,6 +26,11 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         repos: []
+      };
+    case commitsFilter.UPDATE_TEXT:
+      return {
+        ...state,        
+        filter: action.filter
       };
     default:
       return state
@@ -49,3 +58,8 @@ export const getRepos = access_token => {
       });
   }
 };
+
+export const setFilter = filter => ({
+  type: commitsFilter.UPDATE_TEXT,
+  filter
+})
