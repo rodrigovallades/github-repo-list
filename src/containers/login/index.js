@@ -38,8 +38,11 @@ export class Login extends Component {
         )}
         <Grid>
           <Jumbotron className='text-center github-login'>
-            <h1 className="app-title display-4">GitHub's repo list challenge</h1>
+            <h1 className="app-title display-4">React + Redux GitHub's Repo List</h1>
             <p className="lead">by Rodrigo Vallades</p>
+            <p className="lead">This application uses OAuth style authentication with GitHub to display the authorized users' repos. User stays authenticated during current session via browser's Session Storage.</p>
+            <button onClick={this.githubAuth} className='login-button btn btn-primary btn-lg'>Login with GitHub</button>
+            <hr className="my-4" />
             <h4>Tech stack</h4>
             <ul className="list-inline">
               <li className="list-inline-item"><Octicon name="check"/> React 16</li>
@@ -56,9 +59,6 @@ export class Login extends Component {
               <li className="list-inline-item"><Octicon name="check"/> Custom responsive CSS (SCSS + Flexbox)</li>
               <li className="list-inline-item"><Octicon name="check"/> Mobile-first</li>
             </ul>
-            <hr className="my-4" />
-            <p className="lead">This application requires OAuth style authentication with GitHub to display the authorized users' repos.</p>
-            <button onClick={this.githubAuth} className='login-button btn btn-primary btn-lg'>Login with GitHub</button>
           </Jumbotron>
           {this.props.wrong_code && (
             <Alert bsStyle="danger">
