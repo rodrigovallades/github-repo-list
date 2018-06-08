@@ -11,13 +11,27 @@ exports[`Login container renders "Login" deep correctly 1`] = `
       <h1
         className="app-title display-4"
       >
-        GitHub's repo list challenge
+        React + Redux GitHub's Repo List
       </h1>
       <p
         className="lead"
       >
         by Rodrigo Vallades
       </p>
+      <p
+        className="lead"
+      >
+        This application uses OAuth style authentication with GitHub to display the authorized users' repos. User stays authenticated during current session via browser's Session Storage.
+      </p>
+      <button
+        className="login-button btn btn-primary btn-lg"
+        onClick={[Function]}
+      >
+        Login with GitHub
+      </button>
+      <hr
+        className="my-4"
+      />
       <h4>
         Tech stack
       </h4>
@@ -112,20 +126,6 @@ exports[`Login container renders "Login" deep correctly 1`] = `
            Mobile-first
         </li>
       </ul>
-      <hr
-        className="my-4"
-      />
-      <p
-        className="lead"
-      >
-        This application requires OAuth style authentication with GitHub to display the authorized users' repos.
-      </p>
-      <button
-        className="login-button btn btn-primary btn-lg"
-        onClick={[Function]}
-      >
-        Login with GitHub
-      </button>
     </div>
     <div
       className="alert alert-info"
