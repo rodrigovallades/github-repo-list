@@ -1,8 +1,13 @@
 @import '../styles/_mixins.scss';
+@import '../styles/_variables.scss';
 
 .repos__repo {
   margin-bottom: 10px;
   cursor: pointer;
+
+  &:hover {
+    border-color: $mainAccent;
+  }
 
   @include breakpoint(medium) {
     flex: 1 0 350px;

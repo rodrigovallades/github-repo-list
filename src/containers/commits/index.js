@@ -18,7 +18,6 @@ export class Commits extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      commits: [],
       repo: '',
       filter: ''
     };
@@ -35,12 +34,6 @@ export class Commits extends Component {
     this.props.getCommits(params)
   }
 
-  componentWillReceiveProps(props){
-    this.setState((prevState, props) => ({
-      commits: props.commits
-    }));
-  }
-
   updateSearch(inputValue) {
     this.setState({
       filter: inputValue
@@ -48,19 +41,16 @@ export class Commits extends Component {
   }
 
   filter(commits) {
-    if (!this.state.filter) {
-      return commits
-    }
     return commits.filter(commit => commit.commit.message.toLowerCase().indexOf(this.state.filter.toLowerCase()) >= 0);
   }
 
   renderCommits() {
-    if (!this.state.commits.length) {
+    if (!this.props.commits.length) {
       return (
         <p>No commits found in this repository.</p>
       )
     }
-    return this.filter(this.state.commits).map((commit, index) => {
+    return this.filter(this.props.commits).map((commit, index) => {
       const date = commit.commit.author.date === null ? '' : commit.commit.author.date,
             avatar_url = commit.author === null || commit.author.avatar_url === null ? '' : commit.author.avatar_url,
             login = commit.commit.author.name === null ? '' : commit.commit.author.name,
@@ -86,7 +76,7 @@ export class Commits extends Component {
           <Loader />
         )}
         <Grid>
-          <h1 className="title"><span className="float-right"><small><Link to="/repos">&lt; repos</Link></small></span> <span className="badge badge-light">{this.filter(this.state.commits).length}</span> {this.state.repo} <small className="text-muted">commits</small></h1>
+          <h1 className="title"><span className="float-right"><small><Link to="/repos">&lt; repos</Link></small></span> <span className="badge badge-light">{this.filter(this.props.commits).length}</span> {this.state.repo} <small className="text-muted">commits</small></h1>
           <Filter updateSearch={this.updateSearch.bind(this)} searchText={this.state.filter} placeholder='Filter commits' />
           <div className='list-group commits'>
             {this.renderCommits()}
@@ -102,6 +92,7 @@ export class Commits extends Component {
 
 Commits.defaultProps = {
   getCommits: function(){},
+  commits: [],
   match: {
     params: ''
   }
